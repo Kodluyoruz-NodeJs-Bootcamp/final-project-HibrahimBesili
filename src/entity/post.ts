@@ -15,14 +15,17 @@ export class UserPost extends BaseEntity{
     @Column()
     name: string;
 
-    @Column()
+    @Column({default:0})
     likeCount: number;
 
-    @Column()
+    @Column({default:0})
     commentCount : number;
 
-    @Column()
+    @Column("bool")
     isShared : boolean;
+
+    @Column({nullable : true})
+    createdTime : Date;
 
     @ManyToOne(() => User,user => user.posts)
     user : User

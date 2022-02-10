@@ -12,7 +12,7 @@ export class Comment extends BaseEntity{
     @Column()
     typeId: number;
     
-    @ManyToOne(() => UserPost, userPost => userPost.comments)
+    @ManyToOne(() => UserPost, userPost => userPost.comments, { cascade: true, onDelete: "CASCADE" })
     userPost : UserPost;
 
     @Column()
@@ -22,7 +22,7 @@ export class Comment extends BaseEntity{
     user : User;
 
     @Column({length:4000})
-    Comment : String;
+    comment : String;
 
     @ManyToOne(() => PostType,postType => postType.comments)
     type: PostType;

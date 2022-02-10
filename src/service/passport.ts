@@ -1,6 +1,6 @@
 import * as passport from 'passport';
-import { Strategy, ExtractJwt } from 'passport-jwt';
-import { getRepository } from 'typeorm';
+const Strategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 import { User } from '../entity/User';
 
 const SECRET_KEY = process.env.SECRET_OR_KEY;
@@ -12,8 +12,7 @@ const options = {
 passport.use(
   'jwt-authentication',
   new Strategy(options, async (payload, done) => {
-    const userRepository = getRepository(User);
-    const user = await userRepository.findOne({
+    const user = await User.findOne({
       id: payload.id
     });
 

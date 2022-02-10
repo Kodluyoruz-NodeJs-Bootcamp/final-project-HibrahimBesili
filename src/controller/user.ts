@@ -1,13 +1,10 @@
 import { Router, Response, Request } from "express";
 import HttpStatusCodes from "http-status-codes";
-
 var bcrypt = require('bcryptjs');
+
 import { register, findUserByUserName, createJWTToken } from "../service/user"
-import { User } from "../entity/user";
 
 const router: Router = Router();
-
-
 
 export const createUser = async (req: Request, res: Response) => {
  
