@@ -14,6 +14,4 @@ export class PostType {
     @OneToMany(() => UserPost,userPost => userPost.type)
     posts : UserPost[]
 
-    @OneToMany(() => Comment,comment => comment.type)
-    comments : Comment[]
 }

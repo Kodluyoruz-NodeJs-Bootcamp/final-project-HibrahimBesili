@@ -2,19 +2,20 @@ import { Router } from 'express';
 import { createPost,updatePost,deletePostById ,getPostsByUserId,getSharedPosts,likePost,sharePosts } from '../controller/post';
 import { createSchema,updateSchema } from "../schema/post";
 import validate from "../middlewares/validate";
-import * as passport from 'passport';
+import { authenticate } from 'passport';
 
 
 const router: Router = Router();
 
-// require('../service/passport');
-router.post('/',validate(createSchema),createPost);
-router.put('/:id',validate(updateSchema),updatePost);
-router.delete('/:id',deletePostById);
-router.get('/user/:userId',getPostsByUserId);
-router.get('/',getSharedPosts);
-router.get('/like/:postId',likePost);
-router.post('/share/',sharePosts);
+const auth = authenticate('jwt',{ session: false });
+
+router.post('/',auth,validate(createSchema),createPost);
+router.put('/:id',auth,validate(updateSchema),updatePost);
+router.delete('/:id',auth,deletePostById);
+router.get('/user/:userId',auth,getPostsByUserId);
+router.get('/',auth,getSharedPosts);
+router.get('/like/:postId',auth,likePost);
+router.post('/share/',auth,sharePosts);
 
 
 export default router;

@@ -1,8 +1,7 @@
 import { Router, Response, Request } from "express";
 import HttpStatusCodes from "http-status-codes";
-var bcrypt = require('bcryptjs');
-
 import { register, findUserByUserName, createJWTToken } from "../service/user"
+var bcrypt = require('bcryptjs');
 
 const router: Router = Router();
 
@@ -37,9 +36,9 @@ export const login = async (req: Request, res: Response) => {
 
     if (isMatch) {
       const token = await createJWTToken(user);
-      res.status(200).send({ token });
+      res.status(HttpStatusCodes.OK).send({ token });
     } else {
-      res.status(400).send({ message: 'Invalid email or password' });
+      res.status(HttpStatusCodes.BAD_REQUEST).send({ message: 'Invalid email or password' });
     }
   }
 };

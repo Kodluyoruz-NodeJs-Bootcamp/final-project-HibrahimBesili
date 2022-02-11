@@ -6,7 +6,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const SECRET_KEY = process.env.SECRET_OR_KEY;
-const EXPIRE_TIME = process.env.EXPIRE_TIME;
+//const EXPIRE_TIME = process.env.EXPIRE_TIME;
 
 const register = async function (newUser: User) {
     const salt = bcrypt.genSaltSync(10);
@@ -20,14 +20,18 @@ const findUserByUserName = async function(userName : string){
       return User.findOne({userName : userName})
 }
 
+const findUserById = async function(Id : number){
+    return User.findOne(Id)
+}
+
 const createJWTToken = async function(user : User){
    const payload = {
       id: user.id,
-      name: user.userName
+      exp: Math.floor(Date.now() / 1000) + 2 * 60 * 60,
     };
-    const token =  jwt.sign(payload, SECRET_KEY, { expiresIn: EXPIRE_TIME });
+    const token =  jwt.sign(payload, SECRET_KEY);
 
     return token;
 }
 
-export { register,findUserByUserName,createJWTToken};
+export { register,findUserByUserName,createJWTToken,findUserById};

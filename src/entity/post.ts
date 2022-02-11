@@ -24,7 +24,7 @@ export class UserPost extends BaseEntity{
     @Column("bool")
     isShared : boolean;
 
-    @Column({nullable : true})
+    @Column()
     createdTime : Date;
 
     @ManyToOne(() => User,user => user.posts)

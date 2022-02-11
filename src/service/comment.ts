@@ -1,7 +1,8 @@
 import { Comment } from "../entity/comment";
 
 const create = async function (newComment: Comment) {
-    await Comment.create(Comment).save();
+    newComment.createdTime = new Date();
+    await Comment.create(newComment).save();
 }
 
 const update = async function (comment: Comment, id: number) {
@@ -12,9 +13,11 @@ const deleteComment = async function (id: number) {
     await Comment.delete(id);
 }
 
-const getCommentsbyPostId = async function (commentId: number) {
+const getCommentsbyPostId = async function (postId: number) {
     return await Comment.createQueryBuilder("Comment")
-        .where("Comment.postId = :id", { id: commentId })
+        .innerJoin("Comment.user", "User")
+        .select(['User.id', 'User.userName', "Comment"])
+        .where("Comment.userPostId = :id", { id: postId })
         .getMany();
 }
 

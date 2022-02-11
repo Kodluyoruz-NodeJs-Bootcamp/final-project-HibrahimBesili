@@ -39,13 +39,13 @@ export const createComment = async (req: Request, res: Response) => {
   };
 
   export const getCommentsByPostId = async (req: Request, res: Response) => {
-    let { commentId } = req.params
+    let { postId } = req.params
     try {
-      const comments = await getCommentsbyPostId(commentId)
+      const comments = await getCommentsbyPostId(postId)
       res.status(HttpStatusCodes.OK).send(comments);
     }
     catch (error) {
-      res.status(HttpStatusCodes.BAD_REQUEST).json({ message: error });
+      res.status(HttpStatusCodes.BAD_REQUEST).json({ message: "error" });
     }
   
   };
