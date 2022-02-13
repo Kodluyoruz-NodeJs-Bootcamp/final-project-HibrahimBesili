@@ -22,9 +22,9 @@ createConnection().then(async connection => {
     app.use(bodyParser.json());
     app.use(cors());
     app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(session({ secret: 'SECRET' }));
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(session({ secret: 'SECRET' }));
     app.use('/users', userRouter);
     app.use('/posts', postRouter);
     app.use('/comments',commentRouter);
