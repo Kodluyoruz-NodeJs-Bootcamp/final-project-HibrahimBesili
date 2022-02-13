@@ -1,10 +1,10 @@
 {
    "type": "mysql",
-   "host": "us-cdbr-east-05.cleardb.net",
+   "host": "localhost",
    "port": 3306,
-   "username": "bf43c4c6dbd78c",
-   "password": "85e0b0a1",
-   "database": "heroku_0278d1f51a194fa",
+   "username": "root",
+   "password": "1234",
+   "database": "favmovactappdb",
    "synchronize": true,
    "logging": false,
    "entities": [

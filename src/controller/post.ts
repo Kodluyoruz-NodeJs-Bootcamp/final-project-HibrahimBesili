@@ -8,6 +8,8 @@ export const createPost = async (req: Request, res: Response) => {
 
   const newPost = { ...req.body };
 
+  newPost.user = req["user"].id;
+
   try {
     const post = await create(newPost);
     res.status(HttpStatusCodes.CREATED).send(post);
@@ -39,9 +41,9 @@ export const deletePostById = async (req: Request, res: Response) => {
 };
 
 export const getPostsByUserId = async (req: Request, res: Response) => {
-  let { userId } = req.params
+
   try {
-    const posts = await getPostsbyUserId(Number(userId))
+    const posts = await getPostsbyUserId(req["user"].id)
     res.status(HttpStatusCodes.OK).send(posts);
   }
   catch (error) {
