@@ -2,6 +2,7 @@
    "name": "favmovactapp",
    "version": "0.0.1",
    "description": "Awesome project developed with TypeORM.",
+   "type": "module",
    "devDependencies": {
       "@types/multer": "^1.4.7",
       "@types/node": "^8.0.29",
