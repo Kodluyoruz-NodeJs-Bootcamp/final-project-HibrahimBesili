@@ -43,13 +43,11 @@ const likePostByPostId = async function (postId) {
      await UserPost.save(post);
 }
 
-const sharePostsByPostIds = async function (postIds) {
-     await UserPost.createQueryBuilder()
-          .update(UserPost)
-          .set({ isShared: true })
-          .whereInIds(postIds)
-          .execute();
+const sharePostByPostId = async function (postId) {
+     let post = await UserPost.findOne(postId);
+     post.isShared = true;
+     await UserPost.save(post);
 }
 
 
-export { create, update, deletePost, getPostsbyUserId, getSharedPostsList, likePostByPostId, sharePostsByPostIds }
+export { create, update, deletePost, getPostsbyUserId, getSharedPostsList, likePostByPostId, sharePostByPostId }

@@ -1,6 +1,6 @@
 import { Router, Response, Request } from "express";
 import HttpStatusCodes from "http-status-codes";
-import { create, update, deletePost, getPostsbyUserId, getSharedPostsList, likePostByPostId,sharePostsByPostIds } from "../service/post"
+import { create, update, deletePost, getPostsbyUserId, getSharedPostsList, likePostByPostId,sharePostByPostId } from "../service/post"
 
 const router: Router = Router();
 
@@ -76,11 +76,11 @@ export const likePost = async (req: Request, res: Response) => {
 };
 
 
-export const sharePosts = async (req: Request, res: Response) => {
-  let  postIds  = {...req.body}
+export const sharePost = async (req: Request, res: Response) => {
+  let  postId  = {...req.body}
 
   try {
-    const post = await sharePostsByPostIds(postIds);
+    const post = await sharePostByPostId(postId);
     res.status(HttpStatusCodes.OK).send(post);;
   }
   catch (error) {
