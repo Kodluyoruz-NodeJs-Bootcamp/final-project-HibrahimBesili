@@ -26,6 +26,10 @@ createConnection().then(async connection => {
     app.use('/comments',commentRouter);
     app.use('/auth',authRouter);
 
+    googleInit();
+    passportInit();
+    facebookInit();
+
     const PORT = process.env.PORT;
 
     app.listen(PORT, () => {
