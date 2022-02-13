@@ -25,8 +25,8 @@ export class UserPost extends BaseEntity{
     @Column('int',{nullable:true})
     typeId : number
 
-    @Column("bool")
-    isShared : boolean;
+    @Column("int")
+    isShared : number;
 
     @Column('date',{nullable:true})
     createdTime : Date;
