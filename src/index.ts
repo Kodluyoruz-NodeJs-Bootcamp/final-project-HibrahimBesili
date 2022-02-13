@@ -12,6 +12,8 @@ import passportInit from './service/passport';
 import googleInit from './service/googleOAuth';
 import facebookInit from './service/facebookOAuth'
 var cors = require('cors');
+const passport = require('passport');
+
 
 const app: Application = express();
 
@@ -20,6 +22,8 @@ createConnection().then(async connection => {
     app.use(bodyParser.json());
     app.use(cors());
     app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(passport.initialize());
+    app.use(passport.session());
     app.use(session({ secret: 'SECRET' }));
     app.use('/users', userRouter);
     app.use('/posts', postRouter);

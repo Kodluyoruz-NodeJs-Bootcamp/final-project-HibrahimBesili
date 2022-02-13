@@ -27,17 +27,26 @@ const user_1 = __importDefault(require("./route/user"));
 const post_1 = __importDefault(require("./route/post"));
 const comment_1 = __importDefault(require("./route/comment"));
 const auth_1 = __importDefault(require("./route/auth"));
+const passport_1 = __importDefault(require("./service/passport"));
+const googleOAuth_1 = __importDefault(require("./service/googleOAuth"));
+const facebookOAuth_1 = __importDefault(require("./service/facebookOAuth"));
 var cors = require('cors');
+const passport = require('passport');
 const app = express_1.default();
 typeorm_1.createConnection().then((connection) => __awaiter(this, void 0, void 0, function* () {
     app.use(bodyParser.json());
     app.use(cors());
     app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(passport.initialize());
+    app.use(passport.session());
     app.use(session({ secret: 'SECRET' }));
     app.use('/users', user_1.default);
     app.use('/posts', post_1.default);
     app.use('/comments', comment_1.default);
     app.use('/auth', auth_1.default);
+    googleOAuth_1.default();
+    passport_1.default();
+    facebookOAuth_1.default();
     const PORT = process.env.PORT;
     app.listen(PORT, () => {
         console.log(`🔥🔥 Server is listening on port ${PORT} 🔥🔥🔥`);
