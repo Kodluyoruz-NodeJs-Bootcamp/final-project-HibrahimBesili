@@ -15,7 +15,7 @@ router.delete('/:id',auth,deletePostById);
 router.get('/user',auth,getPostsByUserId);
 router.get('/',auth,getSharedPosts);
 router.get('/like/:postId',auth,likePost);
-router.post('/share/',auth,sharePost);
+router.post('/share',auth,sharePost);
 
 export default router;
 
