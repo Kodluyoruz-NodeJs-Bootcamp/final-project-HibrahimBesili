@@ -15,7 +15,7 @@ const update = async function (post, id: number) {
           const updatePost  = {
                name : post.name,
                isShared : post.isShared,
-               imageName : post.file.filename
+               imageName : post.imageName
           }
      }
 

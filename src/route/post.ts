@@ -9,10 +9,10 @@ const router: Router = Router();
 
 const auth = authenticate('jwt',{ session: false });
 
-router.post('/',auth,validate(createSchema),uploadPhoto.single('image'),createPost);
-router.put('/:id',auth,validate(updateSchema),uploadPhoto.single('image'),updatePost);
+router.post('/',auth,validate(createSchema),createPost);
+router.put('/:id',auth,validate(updateSchema),updatePost);
 router.delete('/:id',auth,deletePostById);
-router.get('/user/:userId',auth,getPostsByUserId);
+router.get('/user',auth,getPostsByUserId);
 router.get('/',auth,getSharedPosts);
 router.get('/like/:postId',auth,likePost);
 router.post('/share/',auth,sharePosts);
