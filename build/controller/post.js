@@ -58,6 +58,7 @@ var createPost = function (req, res) { return __awaiter(void 0, void 0, void 0, 
         switch (_a.label) {
             case 0:
                 newPost = __assign({}, req.body);
+                newPost.user = req["user"].id;
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
@@ -123,24 +124,21 @@ var deletePostById = function (req, res) { return __awaiter(void 0, void 0, void
 }); };
 exports.deletePostById = deletePostById;
 var getPostsByUserId = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var userId, posts, error_4;
+    var posts, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                userId = req.params.userId;
-                _a.label = 1;
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, (0, post_1.getPostsbyUserId)(req["user"].id)];
             case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, (0, post_1.getPostsbyUserId)(Number(userId))];
-            case 2:
                 posts = _a.sent();
                 res.status(http_status_codes_1.default.OK).send(posts);
-                return [3 /*break*/, 4];
-            case 3:
+                return [3 /*break*/, 3];
+            case 2:
                 error_4 = _a.sent();
                 res.status(http_status_codes_1.default.BAD_REQUEST).json({ message: error_4 });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
