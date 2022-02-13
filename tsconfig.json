@@ -1,7 +1,15 @@
 {
-   "compilerOptions": {
-     "outDir": "build",
-     "target": "es6",
-   },
- }
- 
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "build",
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true
+  },
+  "lib": ["es2018"],
+
+}

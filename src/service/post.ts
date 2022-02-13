@@ -1,5 +1,4 @@
 import { UserPost } from "../entity/post";
-import { User } from "../entity/user";
 
 const create = async function (newPost: UserPost) {
      newPost.createdTime = new Date();

@@ -1,6 +1,6 @@
-var path = require('path');
-var multer = require('multer');
-var storage = multer.diskStorage({
+const path = require('path');
+const multer = require('multer');
+const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, '../upload/posts');
     },
@@ -8,7 +8,7 @@ var storage = multer.diskStorage({
         cb(null, req.name + "" + path.extname(file.originalname));
     }
 });
-var fileFilter = function (req, file, cb) {
+const fileFilter = (req, file, cb) => {
     if (file.mimetype === "image/jpg" ||
         file.mimetype === "image/jpeg" ||
         file.mimetype === "image/png") {
@@ -18,6 +18,6 @@ var fileFilter = function (req, file, cb) {
         cb(new Error("Image uploaded is not of type jpg/jpeg or png"), false);
     }
 };
-var uploadPhoto = multer({ storage: storage, fileFilter: fileFilter });
+const uploadPhoto = multer({ storage: storage, fileFilter: fileFilter });
 module.exports = uploadPhoto;
 //# sourceMappingURL=upload.js.map

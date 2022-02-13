@@ -1,3 +1,4 @@
+
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, BaseEntity} from "typeorm";
 import { Comment } from "./comment";
 import { User } from "./user";
@@ -9,7 +10,7 @@ export class UserPost extends BaseEntity{
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column('text',{nullable:true})
     name: string;
 
     @Column({default:0})
@@ -21,13 +22,13 @@ export class UserPost extends BaseEntity{
     @Column({default:"../upload/posts/default.png"})
     imageName:string;
 
-    @Column()
-    typeId : PostType
+    @Column('int',{nullable:true})
+    typeId : number
 
     @Column("bool")
     isShared : boolean;
 
-    @Column()
+    @Column('date',{nullable:true})
     createdTime : Date;
 
     @ManyToOne(() => User,user => user.posts)

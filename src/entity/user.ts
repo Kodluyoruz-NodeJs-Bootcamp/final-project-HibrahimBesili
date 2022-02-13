@@ -1,3 +1,4 @@
+
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity} from "typeorm";
 import { Comment } from "./comment";
 import { UserPost } from "./post";
@@ -8,22 +9,22 @@ export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column('text',{nullable:true})
     firstName: string;
 
-    @Column()
+    @Column('text',{nullable:true})
     lastName: string;
 
     @Column({unique : true})
     email: string;
 
-    @Column()
+    @Column('text',{nullable:true})
     userName: string;
 
     @Column({default:''})
     password: string;
 
-    @Column()
+    @Column('date',{nullable:true})
     createdTime : Date;
 
     @OneToMany(() => UserPost,userPost => userPost.user)

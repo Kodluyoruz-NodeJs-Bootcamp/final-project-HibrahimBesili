@@ -1,8 +1,8 @@
-import * as express from 'express';
+import "reflect-metadata";
+import express from 'express';
 import { Application } from 'express';
 var session = require('express-session');
 import * as bodyParser from 'body-parser';
-import "reflect-metadata";
 import {createConnection} from "typeorm";
 import userRouter from './route/user';
 import postRouter from './route/post';
@@ -26,10 +26,6 @@ createConnection().then(async connection => {
     app.use('/comments',commentRouter);
     app.use('/auth',authRouter);
 
-    passportInit();
-    googleInit();
-    facebookInit();
- 
     const PORT = process.env.PORT;
 
     app.listen(PORT, () => {

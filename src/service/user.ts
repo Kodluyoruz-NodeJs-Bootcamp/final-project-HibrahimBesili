@@ -1,6 +1,7 @@
 import { User } from "../entity/user";
 const bcrypt = require("bcryptjs");
 import * as jwt from 'jsonwebtoken';
+import "reflect-metadata"
 
 import * as dotenv from 'dotenv';
 dotenv.config();

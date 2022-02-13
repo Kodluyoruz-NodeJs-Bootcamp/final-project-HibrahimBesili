@@ -1,3 +1,4 @@
+
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, BaseEntity} from "typeorm";
 import { UserPost } from "./post";
 import { User } from "./user";
@@ -11,7 +12,7 @@ export class Comment extends BaseEntity{
     @ManyToOne(() => UserPost, userPost => userPost.comments, { cascade: true, onDelete: "CASCADE" })
     userPost : UserPost;
 
-    @Column()
+    @Column('date',{nullable:true})
     createdTime : Date;
 
     @ManyToOne(() => User, user => user.comments)

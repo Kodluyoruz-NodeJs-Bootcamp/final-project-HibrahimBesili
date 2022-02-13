@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import { Comment } from "../entity/comment";
 
 const create = async function (newComment: Comment) {
