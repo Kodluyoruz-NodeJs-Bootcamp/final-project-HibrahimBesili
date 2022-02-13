@@ -21,7 +21,7 @@ export const updatePost = async (req: Request, res: Response) => {
   let newPost = { ...req.body };
 
   try {
-    const post = await update(newPost, id);
+    const post = await update(newPost, Number(id));
     res.status(HttpStatusCodes.OK).send(post);
   } catch (error) {
     res.status(HttpStatusCodes.BAD_REQUEST).json({ message: error });
@@ -31,7 +31,7 @@ export const updatePost = async (req: Request, res: Response) => {
 export const deletePostById = async (req: Request, res: Response) => {
   let { id } = req.params;
   try {
-    const post = await deletePost(id);
+    const post = await deletePost(Number(id));
     res.status(HttpStatusCodes.OK).send(post);
   } catch (error) {
     res.status(HttpStatusCodes.BAD_REQUEST).json({ message: error });
@@ -41,7 +41,7 @@ export const deletePostById = async (req: Request, res: Response) => {
 export const getPostsByUserId = async (req: Request, res: Response) => {
   let { userId } = req.params
   try {
-    const posts = await getPostsbyUserId(userId)
+    const posts = await getPostsbyUserId(Number(userId))
     res.status(HttpStatusCodes.OK).send(posts);
   }
   catch (error) {

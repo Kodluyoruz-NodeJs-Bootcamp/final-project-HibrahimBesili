@@ -16,7 +16,7 @@ const deleteComment = async function (id: number) {
 const getCommentsbyPostId = async function (postId: number) {
     return await Comment.createQueryBuilder("Comment")
         .innerJoin("Comment.user", "User")
-        .select(['User.id', 'User.userName', "Comment"])
+        .select(['User.id', 'User.email', "Comment"])
         .where("Comment.userPostId = :id", { id: postId })
         .getMany();
 }

@@ -16,15 +16,15 @@ const register = async function (newUser: User) {
     let user = await User.create(newUser).save();
 }
 
-const findUserByUserName = async function(userName : string){
-      return User.findOne({userName : userName})
+const findUserByEmail = async function(email : string){
+      return User.findOne({email : email})
 }
 
 const findUserById = async function(Id : number){
     return User.findOne(Id)
 }
 
-const createJWTToken = async function(user : User){
+const createJWTToken = async function(user){
    const payload = {
       id: user.id,
       exp: Math.floor(Date.now() / 1000) + 2 * 60 * 60,
@@ -34,4 +34,4 @@ const createJWTToken = async function(user : User){
     return token;
 }
 
-export { register,findUserByUserName,createJWTToken,findUserById};
+export { register,findUserByEmail,createJWTToken,findUserById};

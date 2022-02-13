@@ -3,11 +3,24 @@ import { User } from "../entity/user";
 
 const create = async function (newPost: UserPost) {
      newPost.createdTime = new Date();
-     await UserPost.create(newPost).save();
+     return await UserPost.create(newPost).save();
 }
 
-const update = async function (post: UserPost, id: number) {
-     await UserPost.update(id, { name: post.name, isShared: post.isShared });
+const update = async function (post, id: number) {
+     const updatePost  = {
+          name : post.name,
+          isShared : post.isShared,
+     }
+
+     if(post.file){
+          const updatePost  = {
+               name : post.name,
+               isShared : post.isShared,
+               imageName : post.file.filename
+          }
+     }
+
+     return await UserPost.update(id,updatePost);
 }
 
 const deletePost = async function (id: number) {
@@ -19,9 +32,8 @@ const getPostsbyUserId = async function (userId: number) {
 }
 
 const getSharedPostsList = async function () {
-     return await User.createQueryBuilder("User")
-          .innerJoin("User.posts", "UserPost")
-          .select(['User.id', 'User.firstName', 'User.lastName', 'User.userName', "UserPost"])
+     return await UserPost.createQueryBuilder("UserPost")
+          .innerJoinAndSelect("UserPost.user", "User")
           .where("UserPost.isShared = :isShared", { isShared: 1 })
           .getMany();
 }

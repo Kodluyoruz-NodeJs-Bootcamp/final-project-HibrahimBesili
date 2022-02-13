@@ -10,7 +10,7 @@ const createSchema: ObjectSchema = Joi.object({
 
   const updateSchema: ObjectSchema = Joi.object({
     name: Joi.string(),
-    isShared : Joi.number(),
+    isShared : Joi.boolean(),
   });
 
 export { createSchema,updateSchema };

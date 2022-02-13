@@ -21,7 +21,7 @@ export const createComment = async (req: Request, res: Response) => {
     let newComment = { ...req.body };
   
     try {
-      const post = await update(newComment, id);
+      const post = await update(newComment, Number(id));
       res.status(HttpStatusCodes.OK).send(post);
     } catch (error) {
       res.status(HttpStatusCodes.BAD_REQUEST).json({ message: error });
@@ -31,7 +31,7 @@ export const createComment = async (req: Request, res: Response) => {
   export const deleteCommentById = async (req: Request, res: Response) => {
     let { id } = req.params;
     try {
-      const comment = await deleteComment(id);
+      const comment = await deleteComment(Number(id));
       res.status(HttpStatusCodes.OK).send(comment);
     } catch (error) {
       res.status(HttpStatusCodes.BAD_REQUEST).json({ message: error });
@@ -41,7 +41,7 @@ export const createComment = async (req: Request, res: Response) => {
   export const getCommentsByPostId = async (req: Request, res: Response) => {
     let { postId } = req.params
     try {
-      const comments = await getCommentsbyPostId(postId)
+      const comments = await getCommentsbyPostId(Number(postId))
       res.status(HttpStatusCodes.OK).send(comments);
     }
     catch (error) {

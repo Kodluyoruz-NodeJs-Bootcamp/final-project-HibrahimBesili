@@ -1,6 +1,6 @@
 import { Router, Response, Request } from "express";
 import HttpStatusCodes from "http-status-codes";
-import { register, findUserByUserName, createJWTToken } from "../service/user"
+import { register, findUserByEmail, createJWTToken } from "../service/user"
 var bcrypt = require('bcryptjs');
 
 const router: Router = Router();
@@ -10,7 +10,7 @@ export const createUser = async (req: Request, res: Response) => {
   const newUser = { ...req.body };
  
   try {
-    const user = await findUserByUserName(newUser.userName);
+    const user = await findUserByEmail(newUser.email);
 
     if (user) {
       return res.status(HttpStatusCodes.BAD_REQUEST).json({ errors: [ {msg: "User already exists"}] });
@@ -27,7 +27,7 @@ export const createUser = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   const newUser = { ...req.body };
 
-    const user = await findUserByUserName(newUser.userName);
+    const user = await findUserByEmail(newUser.email);
 
   if (!user) {
     res.status(400).send({ message: 'Invalid email or password' });
@@ -43,4 +43,17 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+export const googleLogin = async (req: Request, res: Response) => {
+      const User = {...req["user"]}
+      const token = await createJWTToken(User);
+      res.status(HttpStatusCodes.OK).send({ token });
+  };
 
+  export const facebookLogin = async (req: Request, res: Response) => {
+    const User = {...req["user"]};
+    console.log("Facebook Login User:",User);
+    const token = await createJWTToken(User);
+    res.status(HttpStatusCodes.OK).send({ token });
+};
+
+ 

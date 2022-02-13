@@ -2,7 +2,7 @@ import * as passport from 'passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import {findUserById} from './user'
 
-export default function init() {
+export default function passportInit() {
 const SECRET_KEY = process.env.SECRET_OR_KEY;
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
