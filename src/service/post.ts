@@ -45,7 +45,7 @@ const likePostByPostId = async function (postId) {
 
 const sharePostByPostId = async function (postId) {
      let post = await UserPost.findOne(postId);
-     post.isShared = true;
+     post.isShared = 1;
      await UserPost.save(post);
 }
 
