@@ -23,6 +23,31 @@ const Login = () => {
     console.log('Failed:', errorInfo);
   };
 
+ const register = () =>{
+    navigate("/register");
+ }; 
+
+ const facebookLogin = async () =>{
+    try {
+        const res = await api.get('/auth/facebook');
+        localStorage.setItem("token",res.data.token);
+        navigate("/");
+  
+     } catch(err) {
+       console.log(err)
+     }
+ };
+
+ const googleLogin = async () =>{
+    try {
+        const res = await api.get('/auth/google');
+        localStorage.setItem("token",res.data.token);
+        navigate("/");
+  
+     } catch(err) {
+       console.log(err)
+     }
+ };
 
   return (
    <LoginWrapper>
@@ -60,6 +85,21 @@ const Login = () => {
             <Form.Item >
               <Button type="primary" htmlType="submit">
                 Submit
+              </Button>
+            </Form.Item>
+            <Form.Item >
+              <Button type="primary" onClick={register}>
+                Register
+              </Button>
+            </Form.Item>
+            <Form.Item >
+              <Button type="primary" onClick={facebookLogin}>
+                Login with Facebook
+              </Button>
+            </Form.Item>
+            <Form.Item >
+              <Button type="primary" onClick={googleLogin}>
+              Login with Google
               </Button>
             </Form.Item>
           </Form>
